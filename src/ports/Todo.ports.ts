@@ -3,7 +3,10 @@ import axios from "axios/index";
 
 
 export default class TodoPorts {
-   // #url = "https://646332f37a9eead6fadfb61c.mockapi.io/";
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    #url = "https://646332f37a9eead6fadfb61c.mockapi.io/";
 
     getAllTodo() {
         const endPoint = "Todo";

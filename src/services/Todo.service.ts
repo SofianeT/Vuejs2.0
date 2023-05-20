@@ -3,6 +3,8 @@ import TodoPorts from "@/ports/Todo.ports";
 
 export default class TodoService {
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     #_todoPorts: TodoPorts;
 
     constructor() {
