@@ -1,5 +1,5 @@
 import { Todo } from "@/entities/Todo";
-import axios from "axios/index";
+import axios from "axios";
 
 
 export default class TodoPorts {
