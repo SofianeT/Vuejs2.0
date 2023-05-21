@@ -5,59 +5,46 @@ import TodoService from "@/services/Todo.service";
 
 Vue.use(Vuex)
 
-interface ResponseService {
-  data: [],
-  count: number
-}
 
-interface toggleTodoObject {
-  todo: Todo,
-  completed: boolean
-}
-
-export default {
-  namespaced: true,
-  state: {
-    allTodo: {
-      data: [],
-      count: 0
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+export default new Vuex.Store({
+    state: {
+        todos: [] as Todo[],
+        countTodo: 0,
     },
-    countTodo: 0
-  },
-  getters: {
-    allTodo: (state: any) => state.allTodo,
-  },
-  mutations: {
-  },
-  actions: {
-
-    async getAllTodo({commit}: any) {
-
-      const todoService = new TodoService();
-      const data = await todoService.getTodo();
-        commit('setAllTodo', data);
-    },
-    async updateTodo(context: any, payload: toggleTodoObject ) {
-      const todo = {
-        id: payload.todo.id,
-        title: payload.todo.title,
-        completed: payload.completed ? !payload.todo.completed : payload.todo.completed,
-        createdAt: payload.todo.createdAt,
-        modifiedAt: new Date()
-      }
-      const todoService = new TodoService();
-      const response = await todoService.updateTodo(todo)
-
-        if (response === true) {
-          context.dispatch('getAllTodo');
+    mutations: {
+          setTodos(state: { todos: any; countTodo: any; }, payload: { data: any; count: any; }) {
+            state.todos = payload.data;
+            state.countTodo = payload.count;
+        },
+        addTodo: (state: { todos: any[]; }, payload: any) => {
+            state.todos.push(payload);
         }
-      }
     },
-    async deteleTodo(context: any, todo: Todo) {
-      const todoService = new TodoService();
-      const response = await todoService.deleteTodo(todo.id)
-      if (response === true) {
-        context.dispatch('getAllTodo');
+    actions: {
+          async getTodos({ commit }: any, payload: { data: any; count: any;}) {
+            const todoService = new TodoService();
+            const response = await todoService.getTodo();
+            commit("setTodos", response);
+        },
+        async addTodo ({ commit }: any, payload: Todo) {
+            const todoService = new TodoService();
+            const response = await todoService.createATodo(payload);
+            if (response) {
+                commit("addTodo", payload);
+            }
         }
-      },
-}
+    },
+    getters: {
+            getTodos: (state: { todos: any; }) => {
+            return state.todos;
+        },
+        getCountTodo: (state: { countTodo: any; }) => {
+            return state.countTodo;
+        }
+    },
+    modules: {
+      }
+
+} as any)
