@@ -41,7 +41,7 @@ export default class TodoService {
         return false
     }
 
-    async updateTodo(todo: Todo): Promise<boolean> {
+    async updateTodo(todo: { createdAt: Date; modifiedAt: Date; id: string; completed: boolean; title: string }): Promise<boolean> {
         const check = this.checkDataIsTodo(todo);
 
         if (!check) return false
