@@ -177,31 +177,32 @@ export default Vue.extend({
   }),
 
   methods: {
-    // addTodo() {
-    //   if (
-    //     this.newTodo.title.trim().length > 0 &&
-    //     this.newTodo.description.trim().length > 0
-    //   ) {
-    //     const newId = this.todoList.length.toString();
-    //     const newTodo = {
-    //       id: newId,
-    //       title: this.newTodo.title,
-    //       description: this.newTodo.description,
-    //       completed: false,
-    //       createdAt: new Date(),
-    //       modifiedAt: null,
-    //     };
+     addTodo() {
+       if (
+         this.newTodo.title.trim().length > 0 &&
+         this.newTodo.description.trim().length > 0
+       ) {
+         const newId = this.todoList.length.toString();
+         const newTodo = {
+           id: newId,
+           title: this.newTodo.title,
+           description: this.newTodo.description,
+           completed: false,
+           createdAt: new Date(),
+           modifiedAt: null,
+         };
 
-    //     this.todoList.push(newTodo);
+         this.todoList.push(newTodo);
 
-    //     this.newTodo.title = "";
-    //     this.newTodo.description = "";
+         this.newTodo.title = "";
+         this.newTodo.description = "";
 
-    //     this.sortTodoList();
+         this.sortTodoList();
 
-    //     this.dialogAdd = false;
-    //   }
-    // },
+         this.dialogAdd = false;
+       }
+     },
+
     async addTodo() {
       const todo: Todo = { id: '1', title: 'New Todo' };
       const todoWritePort: TodoWritePort = useStore().todoWritePort;
