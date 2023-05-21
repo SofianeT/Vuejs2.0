@@ -15,11 +15,10 @@ export default class TodoService {
         const response = await this.#_todoPorts.getAllTodo();
         const data = response.data;
 
-        let todos: Todo[] = [];
+        const todos: Todo[] = [];
 
         if (!Array.isArray(data)) return false;
 
-        todos = data.filter(this.checkDataIsTodo);
 
         const countTodo = todos.filter((item) => item.completed === false).length;
 
@@ -30,9 +29,7 @@ export default class TodoService {
     }
 
     async createATodo(todo: Todo): Promise<boolean> {
-        const check = this.checkDataIsTodo(todo);
 
-        if (!check) return false
 
         const response = await this.#_todoPorts.createTodo(todo)
 
@@ -42,9 +39,6 @@ export default class TodoService {
     }
 
     async updateTodo(todo: { createdAt: Date; modifiedAt: Date; id: string; completed: boolean; title: string }): Promise<boolean> {
-        const check = this.checkDataIsTodo(todo);
-
-        if (!check) return false
 
         const response = await this.#_todoPorts.updateTodo(todo)
 
@@ -58,14 +52,4 @@ export default class TodoService {
         return false
     }
 
-checkDataIsTodo(data: any): data is Todo {
-    if (
-        typeof data.id !== "string" ||
-        typeof data.title !== "string" ||
-        typeof data.completed !== "boolean" ||
-        typeof data.createdAt !== "string"
-    )
-        return false;
-    return true;
-}
 }
