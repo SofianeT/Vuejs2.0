@@ -203,12 +203,12 @@ export default Vue.extend({
        }
      },
 
-    async addTodo() {
-      const todo: Todo = { id: '1', title: 'New Todo' };
-      const todoWritePort: TodoWritePort = useStore().todoWritePort;
-      const newTodo = await todoWritePort.createTodo(todo);
-      this.$store.commit('addTodo', newTodo);
-    },
+   // async addTodo() {
+   //   const todo: Todo = { id: '1', title: 'New Todo' };
+   //   const todoWritePort: TodoWritePort = useStore().todoWritePort;
+   //   const newTodo = await todoWritePort.createTodo(todo);
+   //   this.$store.commit('addTodo', newTodo);
+   // },
     // Fonction pour supprimer une todo du tableau
     deleteTodo(id: string) {
       let index = this.todoList.findIndex((todo) => todo.id === id);
