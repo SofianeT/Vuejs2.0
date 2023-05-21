@@ -70,7 +70,7 @@
     <!-- List des Todos présent dans le tableau todoList -->
     <div class="d-flex flex-wrap justify-space-around my-3">
       <TaskCard
-        v-for="todo in todos()"
+        v-for="todo in getDisplayedItems()"
         :key="todo.id"
         :title="todo.title"
         :createdAt="todo.createdAt"
@@ -173,7 +173,7 @@ export default Vue.extend({
       modifiedAt: null,
     } as Todo,
     page: 1,
-    todosPerPage: 8
+    todosPerPage: 1
   }),
 
   methods: {
@@ -202,14 +202,6 @@ export default Vue.extend({
          this.dialogAdd = false;
        }
      },
-
-   // async addTodo() {
-   //   const todo: Todo = { id: '1', title: 'New Todo' };
-   //   const todoWritePort: TodoWritePort = useStore().todoWritePort;
-   //   const newTodo = await todoWritePort.createTodo(todo);
-   //   this.$store.commit('addTodo', newTodo);
-   // },
-    // Fonction pour supprimer une todo du tableau
     deleteTodo(id: string) {
       let index = this.todoList.findIndex((todo) => todo.id === id);
       if (index !== -1) {
@@ -286,9 +278,6 @@ export default Vue.extend({
   computed: {
     totalPages() {
       return Math.ceil(this.todoList.length / this.todosPerPage);
-    },
-    todos() {
-      return this.$store.state.todos;
     },
   }
 });
