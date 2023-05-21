@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 import { Todo } from "@/entities/Todo";
 import TodoService from "@/services/Todo.service";
 
-Vue.use(Vuex)
 
+Vue.use(Vuex)
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
