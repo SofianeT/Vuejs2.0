@@ -5,8 +5,6 @@ import TodoService from "@/services/Todo.service";
 
 Vue.use(Vuex)
 
-
-
 interface ResponseService {
   data: [],
   count: number
